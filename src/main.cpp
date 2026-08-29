@@ -1,3 +1,8 @@
+#include <Arduino.h>
+#include <Servo.h>
+
+// Pin Definitions
+#define ENCODER_CLK PA0
 #include <Servo.h>
 
 // Pin Definitions
