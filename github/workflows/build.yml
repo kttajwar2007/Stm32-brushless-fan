@@ -1,0 +1,32 @@
+name: Compile STM32 Firmware
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install PlatformIO Core
+      run: python -m pip install --upgrade platformio
+
+    - name: Build PlatformIO Project
+      run: pio run
+
+    - name: Upload Firmware Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: stm32-firmware
+        path: .pio/build/bluepill_f103c8/firmware.bin
+        
